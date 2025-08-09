@@ -1,0 +1,5 @@
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/CMakeFiles/ChannelsGenerator.dir
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/CMakeFiles/edit_cache.dir
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/CMakeFiles/rebuild_cache.dir
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/CMakeFiles/ChannelsGenerator_autogen_timestamp_deps.dir
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/CMakeFiles/ChannelsGenerator_autogen.dir

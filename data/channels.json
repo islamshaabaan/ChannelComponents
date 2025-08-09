@@ -1,0 +1,512 @@
+[
+    {
+        "channel_name": "1",
+        "parameters": [
+            {
+                "Ivalue": 40,
+                "isdecimal": false,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 100,
+                "min": 0,
+                "name": "ch_1_param_1"
+            },
+            {
+                "Ivalue": 3,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_1_param_2",
+                "options": [
+                    "option1",
+                    "option2",
+                    "option3",
+                    "option4",
+                    "option5"
+                ]
+            },
+            {
+                "Ivalue": 97.84784222816018,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 100,
+                "min": -50,
+                "name": "ch_1_param_3"
+            },
+            {
+                "Ivalue": 1,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_1_param_4",
+                "options": [
+                    "option5",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": 14.886922377380033,
+                "isdecimal": true,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 25,
+                "min": 0,
+                "name": "ch_1_param_5"
+            },
+            {
+                "Ivalue": true,
+                "isfixed": true,
+                "kind": "bool",
+                "name": "ch_1_param_6"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_1_param_7"
+            },
+            {
+                "Ivalue": 2,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_1_param_8",
+                "options": [
+                    "option4",
+                    "option3",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": -23.493308557417794,
+                "isdecimal": false,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 100,
+                "min": -40,
+                "name": "ch_1_param_9"
+            },
+            {
+                "Ivalue": 0,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_1_param_10",
+                "options": [
+                    "option4",
+                    "option3"
+                ]
+            }
+        ]
+    },
+    {
+        "channel_name": "2",
+        "parameters": [
+            {
+                "Ivalue": 2,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_2_param_1",
+                "options": [
+                    "option3",
+                    "option1",
+                    "option3",
+                    "option3"
+                ]
+            },
+            {
+                "Ivalue": true,
+                "isfixed": true,
+                "kind": "bool",
+                "name": "ch_2_param_2"
+            },
+            {
+                "Ivalue": 0,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_2_param_3",
+                "options": [
+                    "option1",
+                    "option1",
+                    "option1",
+                    "option4"
+                ]
+            },
+            {
+                "Ivalue": -2.582184109318888,
+                "isdecimal": true,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 13,
+                "min": -25,
+                "name": "ch_2_param_4"
+            },
+            {
+                "Ivalue": 0,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_2_param_5",
+                "options": [
+                    "option2",
+                    "option4"
+                ]
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_2_param_6"
+            },
+            {
+                "Ivalue": 1,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_2_param_7",
+                "options": [
+                    "option2",
+                    "option2",
+                    "option2"
+                ]
+            },
+            {
+                "Ivalue": 2,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_2_param_8",
+                "options": [
+                    "option3",
+                    "option4",
+                    "option5",
+                    "option2"
+                ]
+            },
+            {
+                "Ivalue": -73.36446660775337,
+                "isdecimal": true,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": -42,
+                "min": -86,
+                "name": "ch_2_param_9"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": true,
+                "kind": "bool",
+                "name": "ch_2_param_10"
+            },
+            {
+                "Ivalue": true,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_2_param_11"
+            },
+            {
+                "Ivalue": 2,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_2_param_12",
+                "options": [
+                    "option3",
+                    "option1",
+                    "option4",
+                    "option5"
+                ]
+            },
+            {
+                "Ivalue": 0,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_2_param_13",
+                "options": [
+                    "option5",
+                    "option1",
+                    "option3",
+                    "option5"
+                ]
+            },
+            {
+                "Ivalue": -26.880901330701477,
+                "isdecimal": true,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": -25,
+                "min": -41,
+                "name": "ch_2_param_14"
+            },
+            {
+                "Ivalue": 31.91771942470866,
+                "isdecimal": true,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 48,
+                "min": 12,
+                "name": "ch_2_param_15"
+            }
+        ]
+    },
+    {
+        "channel_name": "3",
+        "parameters": [
+            {
+                "Ivalue": 1,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_3_param_1",
+                "options": [
+                    "option5",
+                    "option2",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_3_param_2"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_3_param_3"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_3_param_4"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_3_param_5"
+            },
+            {
+                "Ivalue": 125.91373324760943,
+                "isdecimal": false,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 138,
+                "min": 90,
+                "name": "ch_3_param_6"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_3_param_7"
+            },
+            {
+                "Ivalue": -36.52377853167774,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": -3,
+                "min": -52,
+                "name": "ch_3_param_8"
+            },
+            {
+                "Ivalue": -49.811827011011175,
+                "isdecimal": true,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": -45,
+                "min": -65,
+                "name": "ch_3_param_9"
+            },
+            {
+                "Ivalue": 12.489567755323042,
+                "isdecimal": true,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 29,
+                "min": 2,
+                "name": "ch_3_param_10"
+            }
+        ]
+    },
+    {
+        "channel_name": "4",
+        "parameters": [
+            {
+                "Ivalue": 2,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_4_param_1",
+                "options": [
+                    "option2",
+                    "option2",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": 107.6360276587094,
+                "isdecimal": true,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 138,
+                "min": 97,
+                "name": "ch_4_param_2"
+            },
+            {
+                "Ivalue": 100.42953854066619,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 106,
+                "min": 76,
+                "name": "ch_4_param_3"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_4_param_4"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_4_param_5"
+            },
+            {
+                "Ivalue": 0,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_4_param_6",
+                "options": [
+                    "option3",
+                    "option2",
+                    "option1",
+                    "option3"
+                ]
+            },
+            {
+                "Ivalue": true,
+                "isfixed": true,
+                "kind": "bool",
+                "name": "ch_4_param_7"
+            },
+            {
+                "Ivalue": 3,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_4_param_8",
+                "options": [
+                    "option3",
+                    "option5",
+                    "option4",
+                    "option5"
+                ]
+            },
+            {
+                "Ivalue": -66.1426856551925,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": -57,
+                "min": -73,
+                "name": "ch_4_param_9"
+            },
+            {
+                "Ivalue": 10.747217483927587,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 34,
+                "min": 7,
+                "name": "ch_4_param_10"
+            },
+            {
+                "Ivalue": 2,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_4_param_11",
+                "options": [
+                    "option5",
+                    "option3",
+                    "option3",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": 3,
+                "isfixed": true,
+                "kind": "category",
+                "name": "ch_4_param_12",
+                "options": [
+                    "option4",
+                    "option5",
+                    "option3",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": 37.56999147299559,
+                "isdecimal": true,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 61,
+                "min": 15,
+                "name": "ch_4_param_13"
+            },
+            {
+                "Ivalue": 1,
+                "isfixed": false,
+                "kind": "category",
+                "name": "ch_4_param_14",
+                "options": [
+                    "option3",
+                    "option1"
+                ]
+            },
+            {
+                "Ivalue": false,
+                "isfixed": false,
+                "kind": "bool",
+                "name": "ch_4_param_15"
+            },
+            {
+                "Ivalue": 55.079657981320715,
+                "isdecimal": true,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 71,
+                "min": 27,
+                "name": "ch_4_param_16"
+            },
+            {
+                "Ivalue": 70.53357328321201,
+                "isdecimal": false,
+                "isfixed": true,
+                "kind": "numeric",
+                "max": 91,
+                "min": 70,
+                "name": "ch_4_param_17"
+            },
+            {
+                "Ivalue": 28.441690842087837,
+                "isdecimal": false,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": 30,
+                "min": -1,
+                "name": "ch_4_param_18"
+            },
+            {
+                "Ivalue": false,
+                "isfixed": true,
+                "kind": "bool",
+                "name": "ch_4_param_19"
+            },
+            {
+                "Ivalue": -43.200531774164205,
+                "isdecimal": false,
+                "isfixed": false,
+                "kind": "numeric",
+                "max": -34,
+                "min": -48,
+                "name": "ch_4_param_20"
+            }
+        ]
+    }
+]
