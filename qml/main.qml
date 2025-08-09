@@ -71,11 +71,13 @@ ApplicationWindow {
                             property real maxRole: max
                             property var optionsRole: options
                             property int indexRole: index
-                            
+                            onLoaded: {
+                                console.log("Delegate loaded kind:", kind, "valueRole:", valueRole)
+                            }
                             sourceComponent:
                                 kind === "bool" ? boolComp
-                                : kind === "numeric" ? numericComp
-                                : categoryComp
+                                : kind === "category" ? categoryComp
+                                : numericComp
                         }
                     }
                 }
@@ -97,11 +99,16 @@ ApplicationWindow {
                 Switch {
                     checked: valueRole === true
                     enabled: !isFixedRole
+
                     onCheckedChanged: {
                         var oldVal = valueRole
-                        // update C++ model and log
-                        channelManager.parameterModel.setParameterValue(indexRole, checked)
-                        channelManager.logInteraction(nameRole, oldVal, checked, Date.now())
+                        var newVal = checked    // new UI state
+                        if (oldVal !== newVal) 
+                        { // avoid redundant writes
+                            // update C++ model and log
+                            channelManager.parameterModel.setParameterValue(indexRole, checked)
+                            channelManager.logInteraction(nameRole, oldVal, checked, Date.now())
+                        }
                     }
                 }
 
@@ -119,8 +126,6 @@ ApplicationWindow {
         Item {
             width: parent.width
             height: 60
-
-            property real previousValue: valueRole  // snapshot for logging on release
 
             RowLayout {
                 anchors.fill: parent
@@ -147,6 +152,7 @@ ApplicationWindow {
                             var nv = isDecimalRole ? value : Math.round(value);
                             if (nv !== previousValue) {
                                 channelManager.parameterModel.setParameterValue(indexRole, nv);
+                                channelManager.logInteraction(nameRole, previousValue, nv, Date.now())
                             }
                         }
                     }
@@ -183,9 +189,11 @@ ApplicationWindow {
 
     Component {
         id: categoryComp
+        
         Item {
             width: parent.width
             height: 40
+
             RowLayout {
                 anchors.fill: parent
                 spacing: 12
@@ -194,15 +202,28 @@ ApplicationWindow {
                     id: cb
                     Layout.preferredWidth: 300
                     model: optionsRole
-                    currentIndex: Number(valueRole)  // value is the selected index stored in model
+                    //currentIndex: valueRole ? Number(valueRole) : 0  // value is the selected index stored in model
                     enabled: !isFixedRole
+
+                    // Keep track of previous index before a change
+                    property int previousIndex: 0
+                    
+                    // Use a binding to assign currentIndex only when valueRole and optionsRole are valid
+                    Binding {
+                        target: cb
+                        property: "currentIndex"
+                        when: optionsRole !== undefined && optionsRole.length > 0 && valueRole !== undefined
+                        value: Math.min(Math.max(Number(valueRole), 0), optionsRole.length - 1)
+                    }
+
                     onCurrentIndexChanged: 
                     {
-                        var oldVal = Number(valueRole)
-                        if (oldVal !== currentIndex) 
+                        console.log("ComboBox Initial Value: ", currentIndex)
+                        if (currentIndex  !== previousIndex) 
                         { // avoid redundant writes
                             channelManager.parameterModel.setParameterValue(indexRole, currentIndex)
-                            channelManager.logInteraction(nameRole, oldVal, currentIndex, Date.now())
+                            channelManager.logInteraction(nameRole, previousIndex, currentIndex, Date.now())
+                            previousIndex = currentIndex
                         }
                     }
                 }
