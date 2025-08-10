@@ -10,23 +10,33 @@ ApplicationWindow {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 12
+        spacing: 20
 
-        RowLayout {
-            id: channelsRow
-            spacing: 8
-            // Dynamic buttons if ChannelManager exposes channelCount() and channelName()
-            Repeater {
-                model: channelManager.channelCount ? channelManager.channelCount() : 4
-                delegate: Button {
-                    text: (channelManager.channelName ? channelManager.channelName(index) : (index+1).toString())
-                    onClicked: {
-                        channelManager.selectChannel(index)
+        Item {
+            Layout.fillWidth: true
+            height: 50
+            
+            RowLayout {
+                anchors.fill: parent
+                spacing: 0
+                
+                // Dynamic buttons if ChannelManager exposes channelCount() and channelName()
+                Repeater {
+                    model: channelManager.channelCount ? channelManager.channelCount() : 4
+                    delegate: Button {
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: parent.height
+                        Layout.margins : 15
+                        
+                        text: channelManager.channelName ? channelManager.channelName(index) : (index + 1).toString()
+                        onClicked: {
+                            channelManager.selectChannel(index)
+                        }
                     }
                 }
             }
         }
-
+        
         Rectangle {
             color: "#f4f4f4"
             radius: 8
