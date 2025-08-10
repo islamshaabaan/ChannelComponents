@@ -676,7 +676,6 @@ D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/Paramet
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
-D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/main.cpp
 D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/ParameterModel.h
  mmc:Q_OBJECT
  mdp:D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/build/ChannelsGenerator_autogen/moc_predefs.h
@@ -1015,6 +1014,7 @@ D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/Paramet
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h
  mdp:D:/Programs/Qt/Installation/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
+D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/main.cpp
 D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/ChannelManager.cpp
 D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/Parameter.cpp
 D:/Courses/Qt6CPP/Qt6CppGUIDevelopmentforBeginners/ChannelsGenerator/src/ParameterModel.cpp

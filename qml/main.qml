@@ -26,7 +26,7 @@ ApplicationWindow {
                     delegate: Button {
                         Layout.fillWidth: true
                         Layout.preferredHeight: parent.height
-                        Layout.margins : 15
+                        Layout.margins : 5
                         
                         text: channelManager.channelName ? channelManager.channelName(index) : (index + 1).toString()
                         onClicked: {
@@ -49,22 +49,25 @@ ApplicationWindow {
                 anchors.fill: parent
                 model: channelManager.parameterModel
                 clip: true
-                delegate: Item {
+
+                delegate: Item 
+                {
                     id: rowItem
                     width: paramList.width
-                    height: 60
+                    height: kind === "numeric" ? 60 : 40  // taller for numeric with slider
 
                     RowLayout {
                         anchors.fill: parent
                         anchors.margins: 8
                         spacing: 12
 
+                        // Name column (fixed width)
                         Text {
                             id: nameText
                             text: name
                             elide: Text.ElideRight
                             font.pixelSize: 14
-                            Layout.preferredWidth: 260
+                            Layout.preferredWidth: 200  // Fixed width for name column
                             verticalAlignment: Text.AlignVCenter
                         }
 
@@ -88,6 +91,17 @@ ApplicationWindow {
                                 kind === "bool" ? boolComp
                                 : kind === "category" ? categoryComp
                                 : numericComp
+                        }
+                        // Value display column (fixed width)
+                        Text {
+                            Layout.preferredWidth: 120  // Fixed width for value display
+                            verticalAlignment: Text.AlignVCenter
+                            text: {
+                                if (kind === "bool") return value ? "On" : "Off";
+                                if (kind === "category") return options && options.length > value ? options[value] : "";
+                                if (kind === "numeric") return isDecimal ? Number(value).toFixed(2) : Math.round(value);
+                                return value;
+                            }
                         }
                     }
                 }
@@ -120,12 +134,6 @@ ApplicationWindow {
                             channelManager.logInteraction(nameRole, oldVal, checked, Date.now())
                         }
                     }
-                }
-
-                // show textual representation
-                Text {
-                    text: valueRole ? "On" : "Off"
-                    verticalAlignment: Text.AlignVCenter
                 }
             }
         }
@@ -166,32 +174,6 @@ ApplicationWindow {
                             }
                         }
                     }
-
-                    // snapshot when user starts dragging
-                    //onPressed: previousValue = value
-
-                    // commit on release (to reduce noisy updates)
-                    //onReleased: {
-                    //    var newVal = isDecimalRole ? value : Math.round(value)
-                    //    channelManager.parameterModel.setParameterValue(indexRole, newVal)
-                    //    channelManager.logInteraction(nameRole, previousValue, newVal, Date.now())
-                    //}
-
-                    // optional: if you prefer live updates, uncomment:
-                    //onValueChanged: { 
-                    //    var nv = isDecimalRole ? value : Math.round(value); 
-                    //    if (nv !== value) {
-                    //        channelManager.parameterModel.setParameterValue(indexRole, nv); 
-                    //    }
-                    //}
-                }
-
-                // numeric textual value
-                Text {
-                    // format decimals
-                    text: (isDecimalRole ? Number(valueRole).toFixed(2) : Math.round(valueRole).toString())
-                    width: 80
-                    verticalAlignment: Text.AlignVCenter
                 }
             }
         }
@@ -236,12 +218,6 @@ ApplicationWindow {
                             previousIndex = currentIndex
                         }
                     }
-                }
-
-                // optional: show selected text
-                Text {
-                    text: (optionsRole && optionsRole.length > 0) ? optionsRole[cb.currentIndex] : ""
-                    verticalAlignment: Text.AlignVCenter
                 }
             }
         }

@@ -8,6 +8,7 @@
 
 class ParameterModel : public QAbstractListModel {
     Q_OBJECT
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
 public:
     enum Roles {
         NameRole = Qt::UserRole + 1,
@@ -23,13 +24,16 @@ public:
     explicit ParameterModel(QObject* parent = nullptr);
 
     // model overrides
-    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    Q_INVOKABLE int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
     // helpers
     void setParameters(const QList<Parameter*>& params); // reset model data
     Q_INVOKABLE void setParameterValue(int row, const QVariant& value); // callable from QML
+
+signals:
+    void countChanged();
 
 private:
     QList<Parameter*> mItems;

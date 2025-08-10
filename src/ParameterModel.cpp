@@ -74,6 +74,9 @@ void ParameterModel::setParameters(const QList<Parameter *> &params)
     }
 
     endResetModel();
+    
+    emit countChanged();  // <-- emit count changed here
+
 }
 
 void ParameterModel::setParameterValue(int row, const QVariant &value) 
