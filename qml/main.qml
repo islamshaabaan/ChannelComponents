@@ -10,97 +10,107 @@ ApplicationWindow {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 20
+        spacing: 10
 
-        Item {
+
+        RowLayout 
+        {
             Layout.fillWidth: true
-            height: 50
-            
-            RowLayout {
-                anchors.fill: parent
-                spacing: 0
-                
-                // Dynamic buttons if ChannelManager exposes channelCount() and channelName()
-                Repeater {
-                    model: channelManager.channelCount ? channelManager.channelCount() : 4
-                    delegate: Button {
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: parent.height
-                        Layout.margins : 5
-                        
-                        text: channelManager.channelName ? channelManager.channelName(index) : (index + 1).toString()
-                        onClicked: {
-                            channelManager.selectChannel(index)
-                        }
-                    }
+            height: 60
+            spacing: 5
+
+            Repeater 
+            {
+                model: channelManager.channelCount ? channelManager.channelCount() : 4
+                delegate: Button {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 40
+                    text: channelManager.channelName ? channelManager.channelName(index) : "Channel " + (index + 1)
+
+                    onClicked: channelManager.selectChannel(index)
                 }
             }
         }
         
-        Rectangle {
+        
+        Rectangle 
+        {
             color: "#f4f4f4"
             radius: 8
             Layout.fillWidth: true
             Layout.fillHeight: true
             border.color: "#ddd"
 
-            ListView {
-                id: paramList
+            ScrollView 
+            {
                 anchors.fill: parent
-                model: channelManager.parameterModel
+                anchors.margins: 5
                 clip: true
 
-                delegate: Item 
+                GridView 
                 {
-                    id: rowItem
-                    width: paramList.width
-                    height: kind === "numeric" ? 60 : 40  // taller for numeric with slider
+                    id: paramGrid
+                    anchors.fill: parent
+                    cellWidth: parent.width / 2
+                    cellHeight: 100
+                    model: channelManager.parameterModel
 
-                    RowLayout {
-                        anchors.fill: parent
-                        anchors.margins: 8
-                        spacing: 12
+                    delegate: Rectangle {
+                        width: paramGrid.cellWidth - 10
+                        height: paramGrid.cellHeight - 5
+                        color: "white"
+                        border.color: "#e0e0e0"
+                        border.width: 1
+                        radius: 6
 
-                        // Name column (fixed width)
-                        Text {
-                            id: nameText
-                            text: name
-                            elide: Text.ElideRight
-                            font.pixelSize: 14
-                            Layout.preferredWidth: 200  // Fixed width for name column
-                            verticalAlignment: Text.AlignVCenter
-                        }
+                        Column 
+                        {
+                            width: parent.width - 20
+                            anchors.centerIn: parent
+                            spacing: 5
 
-                        // loader chooses the right control
-                        Loader {
-                            id: ctlLoader
-                            Layout.fillWidth: true
-                            property string nameRole: name
-                            property string kindRole: kind
-                            property var valueRole: value
-                            property bool isFixedRole: isFixed
-                            property bool isDecimalRole: isDecimal
-                            property real minRole: min
-                            property real maxRole: max
-                            property var optionsRole: options
-                            property int indexRole: index
-                            onLoaded: {
-                                console.log("Delegate loaded kind:", kind, "valueRole:", valueRole)
+                            // Parameter Name
+                            Text {
+                                width: parent.width
+                                text: name
+                                font.pixelSize: 14
+                                font.bold: true
+                                elide: Text.ElideRight
+                                color: isFixed ? "#666" : "#333"
                             }
-                            sourceComponent:
-                                kind === "bool" ? boolComp
-                                : kind === "category" ? categoryComp
-                                : numericComp
-                        }
-                        // Value display column (fixed width)
-                        Text {
-                            Layout.preferredWidth: 120  // Fixed width for value display
-                            verticalAlignment: Text.AlignVCenter
-                            text: {
-                                if (kind === "bool") return value ? "On" : "Off";
-                                if (kind === "category") return options && options.length > value ? options[value] : "";
-                                if (kind === "numeric") return isDecimal ? Number(value).toFixed(2) : Math.round(value);
-                                return value;
+
+                            // loader chooses the right control
+                            Loader {
+                                id: ctlLoader
+                                width: parent.width
+                                property string nameRole: name
+                                property string kindRole: kind
+                                property var valueRole: value
+                                property bool isFixedRole: isFixed
+                                property bool isDecimalRole: isDecimal
+                                property real minRole: min
+                                property real maxRole: max
+                                property var optionsRole: options
+                                property int indexRole: index
+                                
+                                sourceComponent:
+                                    kind === "bool" ? boolComp
+                                    : kind === "category" ? categoryComp
+                                    : numericComp
+                            }
+                            // Value display column (fixed width)
+                            Text {
+                                horizontalAlignment : Text.AlignHCenter
+                                width: parent.width
+                                font.pixelSize: 12
+                                color: "#666"
+
+                                text: {
+                                    if (kind === "bool") return value ? "Enabled" : "Disabled";
+                                    if (kind === "category") return options && options.length > value ? options[value] : "";
+                                    if (kind === "numeric") return "Value: " + (isDecimal ? Number(value).toFixed(2) : Math.round(value));
+                                    return value;
+                                }
                             }
                         }
                     }
@@ -113,27 +123,18 @@ ApplicationWindow {
 
     Component {
         id: boolComp
-        Item {
-            width: parent.width
-            height: 40
-            RowLayout {
-                anchors.fill: parent
-                spacing: 12
-
-                Switch {
-                    checked: valueRole === true
-                    enabled: !isFixedRole
-
-                    onCheckedChanged: {
-                        var oldVal = valueRole
-                        var newVal = checked    // new UI state
-                        if (oldVal !== newVal) 
-                        { // avoid redundant writes
-                            // update C++ model and log
-                            channelManager.parameterModel.setParameterValue(indexRole, checked)
-                            channelManager.logInteraction(nameRole, oldVal, checked, Date.now())
-                        }
-                    }
+        Switch {
+            anchors.horizontalCenter: parent.horizontalCenter
+            checked: valueRole === true
+            enabled: !isFixedRole
+            opacity: isFixedRole ? 0.7 : 1.0
+            
+            onCheckedChanged: {
+                var oldVal = valueRole
+                var newVal = checked
+                if (oldVal !== newVal) {
+                    channelManager.parameterModel.setParameterValue(indexRole, checked)
+                    channelManager.logInteraction(nameRole, oldVal, checked, Date.now())
                 }
             }
         }
@@ -141,43 +142,49 @@ ApplicationWindow {
 
     Component {
         id: numericComp
-        Item {
+        Column {
             width: parent.width
-            height: 60
+            spacing: 5
 
-            RowLayout {
-                anchors.fill: parent
-                spacing: 12
+            Slider {
+                width: parent.width
+                from: minRole
+                to: maxRole
+                stepSize: isDecimalRole ? Math.max((to - from) / 100.0, 0.0001) : 1
+                value: valueRole
+                enabled: !isFixedRole
+                opacity: isFixedRole ? 0.7 : 1.0
 
-                // Slider area
-                Slider {
-                    id: numSlider
-                    Layout.fillWidth: true
-                    from: minRole
-                    to: maxRole
-                    // step size: integer or fine step when decimal allowed
-                    stepSize: isDecimalRole ? Math.max((to - from) / 100.0, 0.0001) : 1
-                    value: valueRole
-                    enabled: !isFixedRole
-
-                    property real previousValue: valueRole
-                    onPressedChanged: {
-                        if (pressed) {
-                            // Drag started
-                            previousValue = value;
-                        } else {
-                            // Drag released
-                            var nv = isDecimalRole ? value : Math.round(value);
-                            if (nv !== previousValue) {
-                                channelManager.parameterModel.setParameterValue(indexRole, nv);
-                                channelManager.logInteraction(nameRole, previousValue, nv, Date.now())
-                            }
+                property real previousValue: valueRole
+                onPressedChanged: {
+                    if (pressed) {
+                        // Drag started
+                        previousValue = value;
+                    } else {
+                        // Drag released
+                        var nv = isDecimalRole ? value : Math.round(value);
+                        if (nv !== previousValue) {
+                            channelManager.parameterModel.setParameterValue(indexRole, nv);
+                            channelManager.logInteraction(nameRole, previousValue, nv, Date.now())
                         }
                     }
                 }
             }
+            RowLayout {
+                width: parent.width
+                Text {
+                    text: "Min: " + (isDecimalRole ? minRole.toFixed(2) : Math.round(minRole))
+                    font.pixelSize: 10
+                }
+                Item { Layout.fillWidth: true }
+                Text {
+                    text: "Max: " + (isDecimalRole ? maxRole.toFixed(2) : Math.round(maxRole))
+                    font.pixelSize: 10
+                }
+            }
         }
     }
+                    
 
     Component {
         id: categoryComp
@@ -186,37 +193,31 @@ ApplicationWindow {
             width: parent.width
             height: 40
 
-            RowLayout {
-                anchors.fill: parent
-                spacing: 12
-                
-                ComboBox {
-                    id: cb
-                    Layout.preferredWidth: 300
-                    model: optionsRole
-                    //currentIndex: valueRole ? Number(valueRole) : 0  // value is the selected index stored in model
-                    enabled: !isFixedRole
+            ComboBox {
+                id: cb
+                width: parent.width
+                model: optionsRole
+                enabled: !isFixedRole
+                opacity: isFixedRole ? 0.7 : 1.0
 
-                    // Keep track of previous index before a change
-                    property int previousIndex: 0
+                // Keep track of previous index before a change
+                property int previousIndex: 0
                     
-                    // Use a binding to assign currentIndex only when valueRole and optionsRole are valid
-                    Binding {
-                        target: cb
-                        property: "currentIndex"
-                        when: optionsRole !== undefined && optionsRole.length > 0 && valueRole !== undefined
-                        value: Math.min(Math.max(Number(valueRole), 0), optionsRole.length - 1)
-                    }
+                // Use a binding to assign currentIndex only when valueRole and optionsRole are valid
+                Binding {
+                    target: cb
+                    property: "currentIndex"
+                    when: optionsRole !== undefined && optionsRole.length > 0 && valueRole !== undefined
+                    value: Math.min(Math.max(Number(valueRole), 0), optionsRole.length - 1)
+                }
 
-                    onCurrentIndexChanged: 
-                    {
-                        console.log("ComboBox Initial Value: ", currentIndex)
-                        if (currentIndex  !== previousIndex) 
-                        { // avoid redundant writes
-                            channelManager.parameterModel.setParameterValue(indexRole, currentIndex)
-                            channelManager.logInteraction(nameRole, previousIndex, currentIndex, Date.now())
-                            previousIndex = currentIndex
-                        }
+                onCurrentIndexChanged: 
+                {
+                    if (currentIndex  !== previousIndex) 
+                    { // avoid redundant writes
+                        channelManager.parameterModel.setParameterValue(indexRole, currentIndex)
+                        channelManager.logInteraction(nameRole, previousIndex, currentIndex, Date.now())
+                        previousIndex = currentIndex
                     }
                 }
             }
